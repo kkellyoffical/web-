@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今天也是开心的一天哦Kelly</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-tabs fixed-nav">
+        <button class="tab-btn active" onclick="switchTab('todo')"><i class="fas fa-tasks"></i> 待办事项</button>
+        <button class="tab-btn" onclick="switchTab('nav')"><i class="fas fa-compass"></i> 导航</button>
+    </div>
+    <div class="container">
+        <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon"></i>
+        </button>
+
+        <div class="panels">
+            <div class="panel todo-panel active">
+                <div class="todo-section">
+            <h2>待办事项</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <span>总任务：</span>
+                    <span id="totalTasks">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>已完成：</span>
+                    <span id="completedTasks">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>待完成：</span>
+                    <span id="pendingTasks">0</span>
+                </div>
+            </div>
+
+            <form id="todoForm" onsubmit="addTodo(event)">
+                <input type="text" id="todoText" placeholder="添加新的待办事项..." required>
+                <input type="text" id="todoDate" placeholder="选择日期">
+                <select id="todoPriority">
+                    <option value="Low">低优先级</option>
+                    <option value="Medium">中优先级</option>
+                    <option value="High">高优先级</option>
+                </select>
+                <select id="todoCategory">
+                    <option value="Work">工作</option>
+                    <option value="Personal">个人</option>
+                    <option value="Shopping">购物</option>
+                    <option value="Study">学习</option>
+                </select>
+                <button type="submit">添加</button>
+            </form>
+
+            <div class="filters">
+                <input type="text" id="filterText" placeholder="搜索..." onkeyup="filterTodos()">
+                <select id="filterPriority" onchange="filterTodos()">
+                    <option value="all">所有优先级</option>
+                    <option value="Low">低优先级</option>
+                    <option value="Medium">中优先级</option>
+                    <option value="High">高优先级</option>
+                </select>
+                <select id="filterCategory" onchange="filterTodos()">
+                    <option value="all">所有类别</option>
+                    <option value="Work">工作</option>
+                    <option value="Personal">个人</option>
+                    <option value="Shopping">购物</option>
+                    <option value="Study">学习</option>
+                </select>
+                <select id="filterStatus" onchange="filterTodos()">
+                    <option value="all">所有状态</option>
+                    <option value="pending">待完成</option>
+                    <option value="completed">已完成</option>
+                </select>
+            </div>
+
+            <ul id="todoList"></ul>
+                </div>
+            </div>
+            <div class="panel nav-panel">
+                <div class="search-section">
+            <form id="searchForm" action="https://www.baidu.com/s" method="GET" target="_blank">
+                <input type="text" name="wd" placeholder="输入关键词搜索..." required>
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        <h1>网站导航</h1>
+        <div class="nav-grid">
+            <a href="https://github.com/" class="nav-item" target="_blank">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+                <p>代码托管和开发协作平台，求求你了不要去隔壁huggingface好不好</p>
+            </a>
+            <a href="https://jwgl.ecupl.edu.cn/student/home" class="nav-item" target="_blank">
+                <i class="fas fa-university"></i>
+                <span>教务系统</span>
+                <p>华东政法大学学生教务管理系统，当然别的学校跟我的UI差不多嘻嘻</p>
+            </a>
+            <a href="https://www.cnki.net/" class="nav-item" target="_blank">
+                <i class="fas fa-book"></i>
+                <span>中国知网</span>
+                <p>中国知识基础设施工程，提供海量学术文献资源</p>
+            </a>
+            <a href="https://www.bilibili.com/" class="nav-item" target="_blank">
+                <i class="fas fa-play-circle"></i>
+                <span>哔哩哔哩</span>
+                <p>视频弹幕网站，哔哩哔哩喵~</p>
+            </a>
+            <a href="https://platform.deepseek.com/usage" class="nav-item" target="_blank">
+                <i class="fas fa-robot"></i>
+                <span>DeepSeek</span>
+                <p>探索无止之境</p>
+            </a>
+            <a href="https://zhtj.youth.cn/zhtj/signin" class="nav-item" target="_blank">
+                <i class="fas fa-flag"></i>
+                <span>智慧团建</span>
+                <p>红星照耀中国</p>
+            </a>
+            <a href="https://www.iqiyi.com/" class="nav-item" target="_blank">
+                <i class="fas fa-tv"></i>
+                <span>爱奇艺</span>
+                <p>小绿打不过小橙，人尽皆知啦</p>
+            </a>
+            <a href="https://www.fmprc.gov.cn/" class="nav-item" target="_blank">
+                <i class="fas fa-landmark"></i>
+                <span>中国外交部</span>
+                <p>外交部帅帅帅帅死啦</p>
+            </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="particles.js"></script>
+    <script src="animations.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
